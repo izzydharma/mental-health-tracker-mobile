@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+// Impor drawer widget
 import 'package:mental_health_tracker/widgets/left_drawer.dart';
-import 'package:mental_health_tracker/widgets/mood_card.dart'; // Import mood_card.dart
+import 'package:mental_health_tracker/widgets/mood_card.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
-
   final String npm = '2306256425'; // NPM
   final String name = 'Made Izzy Prema Dharma'; // Name
-  final String className = 'PBP KKI'; // Class
+  final String className = 'PBD KKI'; // Class
 
   final List<ItemHomepage> items = [
     ItemHomepage("View Mood", Icons.mood),
@@ -15,11 +14,13 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Logout", Icons.logout),
   ];
 
+  MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // Scaffold menyediakan struktur dasar halaman dengan appBar dan body.
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'Mental Health Tracker',
           style: TextStyle(
@@ -27,8 +28,11 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        // Mengganti warna icon drawer menjadi putih
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
       drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,25 +48,32 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16.0),
-            const Text(
-              'Welcome to Mental Health Tracker',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18.0,
+            Center(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: Text(
+                      'Welcome to Mental Health Tracker',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                  GridView.count(
+                    primary: true,
+                    padding: const EdgeInsets.all(20),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    crossAxisCount: 3,
+                    shrinkWrap: true,
+                    children: items.map((ItemHomepage item) {
+                      return ItemCard(item);
+                    }).toList(),
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16.0),
-            GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              children: items.map((ItemHomepage item) {
-                return ItemCard(item: item); // Use ItemCard from mood_card.dart
-              }).toList(),
             ),
           ],
         ),
@@ -94,7 +105,7 @@ class InfoCard extends StatelessWidget {
             Text(content),
           ],
         ),
-     ),
-);
-}
+      ),
+    );
+  }
 }
