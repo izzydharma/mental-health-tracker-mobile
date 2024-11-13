@@ -33,33 +33,33 @@ class MoodEntry {
 }
 
 class Fields {
+    int user;
     String mood;
     DateTime time;
     String feelings;
     int moodIntensity;
-    int user;
 
     Fields({
+        required this.user,
         required this.mood,
         required this.time,
         required this.feelings,
         required this.moodIntensity,
-        required this.user,
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        user: json["user"],
         mood: json["mood"],
         time: DateTime.parse(json["time"]),
         feelings: json["feelings"],
         moodIntensity: json["mood_intensity"],
-        user: json["user"],
     );
 
     Map<String, dynamic> toJson() => {
+        "user": user,
         "mood": mood,
         "time": "${time.year.toString().padLeft(4, '0')}-${time.month.toString().padLeft(2, '0')}-${time.day.toString().padLeft(2, '0')}",
         "feelings": feelings,
         "mood_intensity": moodIntensity,
-        "user": user,
     };
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-// Impor drawer widget
 import 'package:mental_health_tracker/widgets/left_drawer.dart';
 import 'package:mental_health_tracker/widgets/mood_card.dart';
 
 class MyHomePage extends StatelessWidget {
+  MyHomePage({super.key});
   final String npm = '2306256425'; // NPM
   final String name = 'Made Izzy Prema Dharma'; // Name
-  final String className = 'PBD KKI'; // Class
+  final String className = 'PBP KKI'; // Class
+    
 
   final List<ItemHomepage> items = [
     ItemHomepage("View Mood", Icons.mood),
@@ -14,31 +15,35 @@ class MyHomePage extends StatelessWidget {
     ItemHomepage("Logout", Icons.logout),
   ];
 
-  MyHomePage({super.key});
 
-  @override
+@override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur dasar halaman dengan appBar dan body.
+    // Scaffold provides the basic structure of the page with the AppBar and body.
     return Scaffold(
+      // AppBar is the top part of the page that displays the title.
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        // The title of the application "Mental Health Tracker" with white text and bold font.
         title: const Text(
           'Mental Health Tracker',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
+  
         ),
-        // Mengganti warna icon drawer menjadi putih
-        iconTheme: const IconThemeData(color: Colors.white),
+        // The background color of the AppBar is obtained from the application theme color scheme.
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      // Masukkan drawer sebagai parameter nilai drawer dari widget Scaffold
+      // Body of the page with paddings around it.
       drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        // Place the widget vertically in a column.
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Row to display 3 InfoCard horizontally.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -47,10 +52,17 @@ class MyHomePage extends StatelessWidget {
                 InfoCard(title: 'Class', content: className),
               ],
             ),
+
+            // Give a vertical space of 16 units.
             const SizedBox(height: 16.0),
+
+            // Place the following widget in the center of the page.
             Center(
               child: Column(
+                // Place the text and grid item vertically.
+
                 children: [
+                  // Display the welcome message with bold font and size 18.
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
@@ -61,13 +73,18 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+
+                  // Grid to display ItemCard in a 3 column grid.
                   GridView.count(
                     primary: true,
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 3,
+                    // To ensure that the grid fits its height.
                     shrinkWrap: true,
+
+                    // Display ItemCard for each item in the items list.
                     children: items.map((ItemHomepage item) {
                       return ItemCard(item);
                     }).toList(),
@@ -82,19 +99,25 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+
 class InfoCard extends StatelessWidget {
-  final String title;
-  final String content;
+  // Card information that displays the title and content.
+
+  final String title;  // Card title.
+  final String content;  // Card content.
 
   const InfoCard({super.key, required this.title, required this.content});
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      // Create a card box with a shadow.
       elevation: 2.0,
       child: Container(
-        width: MediaQuery.of(context).size.width / 3.5,
+        // Set the size and spacing within the card.
+        width: MediaQuery.of(context).size.width / 3.5, // Adjust with the width of the device used.
         padding: const EdgeInsets.all(16.0),
+        // Place the title and content vertically.
         child: Column(
           children: [
             Text(
